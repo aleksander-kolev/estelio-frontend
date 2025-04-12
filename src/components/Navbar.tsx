@@ -57,7 +57,7 @@ const Navbar = () => {
           <Button variant="outline" className="border-luximo-600 text-luximo-600 hover:bg-luximo-50">
             Вижте демо
           </Button>
-          <Button className="bg-luximo-600 hover:bg-luximo-700">
+          <Button className="bg-luximo-600 hover:bg-luximo-700 text-white">
             Свържете се с нас
           </Button>
         </div>
@@ -94,7 +94,7 @@ const Navbar = () => {
               <Button variant="outline" className="w-full border-luximo-600 text-luximo-600 hover:bg-luximo-50">
                 Вижте демо
               </Button>
-              <Button className="w-full bg-luximo-600 hover:bg-luximo-700">
+              <Button className="w-full bg-luximo-600 hover:bg-luximo-700 text-white">
                 Свържете се с нас
               </Button>
             </div>

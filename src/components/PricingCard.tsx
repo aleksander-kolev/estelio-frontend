@@ -21,7 +21,7 @@ const PricingCard = ({
 }: PricingCardProps) => {
   return (
     <div className={`bg-white rounded-xl shadow-sm border ${
-      isPopular ? "border-luximo-500 shadow-lg" : "border-gray-200"
+      isPopular ? "border-luximo-500 shadow-lg" : "border-luximo-100"
     } p-8 relative flex flex-col h-full`}>
       {isPopular && (
         <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-luximo-600 text-white px-4 py-1 rounded-full text-sm font-medium">
@@ -54,7 +54,7 @@ const PricingCard = ({
         className={`mt-6 w-full ${
           isPopular
             ? "bg-luximo-600 hover:bg-luximo-700 text-white"
-            : "bg-white hover:bg-gray-50 text-luximo-600 border border-luximo-600"
+            : "bg-white hover:bg-luximo-50 text-luximo-600 border border-luximo-600"
         }`}
         variant={isPopular ? "default" : "outline"}
       >
