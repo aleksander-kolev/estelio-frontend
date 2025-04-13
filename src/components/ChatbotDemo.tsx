@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { User, Bot } from "lucide-react";
 
@@ -66,7 +65,6 @@ const ChatbotDemo = () => {
   }, [currentIndex, demoConversation]);
 
   useEffect(() => {
-    // Reset animation after completing
     if (currentIndex === demoConversation.length) {
       const resetTimer = setTimeout(() => {
         setMessages([]);
@@ -77,8 +75,7 @@ const ChatbotDemo = () => {
   }, [currentIndex, demoConversation.length]);
 
   return (
-    <div className="bg-white rounded-xl shadow-xl overflow-hidden w-full max-w-sm mx-auto md:mx-0 border border-gray-200">
-      {/* Chat Header */}
+    <div className="relative bg-white rounded-xl shadow-xl overflow-hidden w-full max-w-sm mx-auto md:mx-0 border border-gray-200">
       <div className="bg-luximo-600 text-white p-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Bot size={20} />
@@ -87,7 +84,6 @@ const ChatbotDemo = () => {
         <div className="h-2 w-2 rounded-full bg-green-400"></div>
       </div>
 
-      {/* Chat Body */}
       <div className="p-4 h-96 flex flex-col overflow-y-auto bg-gray-50">
         <div className="flex-grow flex flex-col space-y-4">
           {messages.map((message) => (
@@ -131,7 +127,6 @@ const ChatbotDemo = () => {
         </div>
       </div>
 
-      {/* Chat Input */}
       <div className="p-4 border-t border-gray-200 bg-white">
         <div className="flex items-center gap-2">
           <input
@@ -158,6 +153,12 @@ const ChatbotDemo = () => {
             </svg>
           </button>
         </div>
+      </div>
+
+      <div className="absolute left-0 right-0 text-center">
+        <p className="text-xs text-gray-400 italic max-w-sm mx-auto p-2">
+          Забележка: Текущата база с имоти е за демонстрация и използва данни от Luximo. Estelio може да бъде интегриран с всяка агенция или уебсайт.
+        </p>
       </div>
     </div>
   );
