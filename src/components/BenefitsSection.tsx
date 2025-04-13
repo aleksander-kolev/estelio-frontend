@@ -1,5 +1,5 @@
 
-import { Clock, UserMinus, TrendingUp, Users } from "lucide-react";
+import { Clock, UserMinus, TrendingUp, Users, Search } from "lucide-react";
 
 const BenefitsSection = () => {
   return (
@@ -10,11 +10,11 @@ const BenefitsSection = () => {
             Ползи за имотните агенции
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Вижте как Luximo може да трансформира вашия бизнес и да увеличи продажбите ви
+            Вижте как ImotAI може да трансформира вашия бизнес и да увеличи продажбите ви
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Benefit 1 */}
           <div className="bg-white p-6 rounded-xl shadow-sm">
             <div className="w-12 h-12 rounded-full bg-luximo-100 flex items-center justify-center mb-4">
@@ -60,6 +60,17 @@ const BenefitsSection = () => {
             <p className="text-gray-600">
               Елиминирайте риска от пропуснати запитвания чрез автоматизирана система 
               за проследяване и уведомяване
+            </p>
+          </div>
+
+          {/* New Benefit 5 */}
+          <div className="bg-white p-6 rounded-xl shadow-sm">
+            <div className="w-12 h-12 rounded-full bg-luximo-100 flex items-center justify-center mb-4">
+              <Search className="text-luximo-600" size={24} />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">По-лесен избор за клиентите</h3>
+            <p className="text-gray-600">
+              Намалете времето за търсене и помогнете на потребителите да открият подходящия имот с едно запитване
             </p>
           </div>
         </div>

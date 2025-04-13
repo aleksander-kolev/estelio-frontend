@@ -82,7 +82,7 @@ const ChatbotDemo = () => {
       <div className="bg-luximo-600 text-white p-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Bot size={20} />
-          <span className="font-medium">Luximo AI Асистент</span>
+          <span className="font-medium">ImotAI Асистент</span>
         </div>
         <div className="h-2 w-2 rounded-full bg-green-400"></div>
       </div>

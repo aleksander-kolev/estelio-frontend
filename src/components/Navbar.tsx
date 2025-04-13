@@ -30,7 +30,7 @@ const Navbar = () => {
     >
       <nav className="container mx-auto flex items-center justify-between">
         <a href="#" className="flex items-center">
-          <span className="text-2xl font-bold text-luximo-700">Luximo</span>
+          <span className="text-2xl font-bold text-luximo-700">ImotAI</span>
         </a>
 
         {/* Desktop Navigation */}
