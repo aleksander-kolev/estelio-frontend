@@ -7,10 +7,10 @@ const HowItWorksSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            Как работи Luximo
+            Как работи Estelio
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Просто интегрирайте нашия чат бот във вашия сайт и оставете Luximo да 
+            Просто интегрирайте нашия чат бот във вашия сайт и оставете Estelio да 
             се погрижи за вашите потенциални клиенти
           </p>
         </div>
@@ -48,7 +48,7 @@ const HowItWorksSection = () => {
                 <span className="font-bold">2</span>
               </div>
               
-              <h3 className="text-xl font-semibold mb-3 text-gray-800 text-center">Luximo намира подходящи имоти</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-800 text-center">Estelio намира подходящи имоти</h3>
               <p className="text-gray-600 text-center">
                 AI анализира запитването, извлича параметри и търси в базата данни 
                 най-подходящите предложения

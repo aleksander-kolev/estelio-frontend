@@ -17,10 +17,10 @@ const HeroSection = () => {
               AI агент за недвижими имоти – 24/7 виртуален консултант за вашите клиенти
             </h1>
             <p className="text-xl text-gray-600">
-              ImotAI автоматично отговаря на въпроси, предлага имоти и генерира качествени запитвания
+              Estelio автоматично отговаря на въпроси, предлага имоти и генерира качествени запитвания
             </p>
             <p className="text-md text-gray-600 italic">
-              „Край на безкрайното скролване – ImotAI намира точния имот за секунди."
+              „Край на безкрайното скролване – Estelio намира точния имот за секунди."
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <Button size="lg" className="bg-luximo-600 hover:bg-luximo-700 text-white">
@@ -46,8 +46,11 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-float">
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-float relative">
             <ChatbotDemo />
+            <p className="absolute bottom-[-24px] text-xs text-gray-400 italic max-w-sm mx-auto">
+              Забележка: Текущата база с имоти е за демонстрация и използва данни от Luximo. Estelio може да бъде интегриран с всяка агенция или уебсайт.
+            </p>
           </div>
         </div>
       </div>
