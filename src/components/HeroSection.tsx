@@ -1,11 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import ChatbotDemo from "./ChatbotDemo";
 import { MessageSquare, ArrowRight } from "lucide-react";
-
 const HeroSection = () => {
-  return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-32 overflow-hidden gradient-bg">
+  return <section className="relative pt-28 pb-20 md:pt-36 md:pb-32 overflow-hidden gradient-bg">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="w-full md:w-1/2 space-y-6">
@@ -48,9 +45,7 @@ const HeroSection = () => {
 
           <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-float relative">
             <ChatbotDemo />
-            <p className="absolute bottom-[-24px] text-xs text-gray-400 italic max-w-sm mx-auto">
-              Забележка: Текущата база с имоти е за демонстрация и използва данни от Luximo. Estelio може да бъде интегриран с всяка агенция или уебсайт.
-            </p>
+            
           </div>
         </div>
       </div>
@@ -58,8 +53,6 @@ const HeroSection = () => {
       {/* Design elements */}
       <div className="absolute top-1/4 right-0 w-64 h-64 bg-luximo-100 rounded-full filter blur-3xl opacity-20 -z-10"></div>
       <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-luximo-200 rounded-full filter blur-3xl opacity-20 -z-10"></div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
