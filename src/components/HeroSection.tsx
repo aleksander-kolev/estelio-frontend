@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import ChatbotDemo from "./ChatbotDemo";
 import { MessageSquare, ArrowRight } from "lucide-react";
@@ -28,7 +27,7 @@ const HeroSection = () => {
                 className="bg-luximo-600 hover:bg-luximo-700 text-white" 
                 asChild
               >
-                <Link to="/login">Вижте демо / Вход</Link>
+                <Link to="/login">Вход / Аналитики</Link>
               </Button>
               <Button 
                 size="lg" 
@@ -63,4 +62,3 @@ const HeroSection = () => {
     </section>;
 };
 export default HeroSection;
-
