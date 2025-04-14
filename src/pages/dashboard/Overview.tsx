@@ -4,8 +4,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getDashboardData } from "@/services/dashboardData";
 import StatsCard from "@/components/dashboard/StatsCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageSquare, Search, LineChart, Clock, TrendingUp } from "lucide-react";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend, PieChart, Pie, Cell } from 'recharts';
+import { MessageSquare, Search, TrendingUp, Clock } from "lucide-react";
+import { 
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, 
+  ResponsiveContainer, BarChart, Bar, Legend, PieChart, Pie, Cell, 
+  LineChart, Line as RechartsLine 
+} from 'recharts';
 
 // Colors for charts
 const COLORS = ["#A08C73", "#B39F80", "#C6B399", "#D9C9AD", "#E6DBC9"];
@@ -84,7 +88,7 @@ const Overview = () => {
                     tickLine={false}
                     domain={[0, 'dataMax + 0.05']}
                   />
-                  <Tooltip 
+                  <RechartsTooltip 
                     formatter={(value) => [`${(Number(value) * 100).toFixed(1)}%`, 'Конверсия']}
                     labelFormatter={(label) => `${label}`}
                   />
@@ -125,7 +129,7 @@ const Overview = () => {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value) => [`${value} запитвания`, '']} />
+                  <RechartsTooltip formatter={(value) => [`${value} запитвания`, '']} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -146,7 +150,7 @@ const Overview = () => {
                   <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
                   <XAxis dataKey="day" />
                   <YAxis />
-                  <Tooltip formatter={(value) => [`${value} чата`, '']} />
+                  <RechartsTooltip formatter={(value) => [`${value} чата`, '']} />
                   <Bar dataKey="conversations" fill="#A08C73" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -169,11 +173,11 @@ const Overview = () => {
                     tickFormatter={(value) => `${value}:00`}
                   />
                   <YAxis />
-                  <Tooltip 
+                  <RechartsTooltip 
                     formatter={(value) => [`${value} потребители`, '']}
                     labelFormatter={(label) => `${label}:00ч`}
                   />
-                  <Line 
+                  <RechartsLine 
                     type="monotone" 
                     dataKey="users" 
                     stroke="#A08C73" 
