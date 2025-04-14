@@ -1,6 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import ChatbotDemo from "./ChatbotDemo";
 import { MessageSquare, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const HeroSection = () => {
   return <section className="relative pt-28 pb-20 md:pt-36 md:pb-32 overflow-hidden gradient-bg">
       <div className="container mx-auto">
@@ -20,10 +23,18 @@ const HeroSection = () => {
               „Край на безкрайното скролване – Estelio намира точния имот за секунди."
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Button size="lg" className="bg-luximo-600 hover:bg-luximo-700 text-white">
-                Вижте демо
+              <Button 
+                size="lg" 
+                className="bg-luximo-600 hover:bg-luximo-700 text-white" 
+                asChild
+              >
+                <Link to="/login">Вижте демо / Вход</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-luximo-600 text-luximo-600 hover:bg-luximo-50">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-luximo-600 text-luximo-600 hover:bg-luximo-50"
+              >
                 Свържете се с нас <ArrowRight size={16} className="ml-2" />
               </Button>
             </div>
@@ -49,10 +60,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Design elements */}
-      <div className="absolute top-1/4 right-0 w-64 h-64 bg-luximo-100 rounded-full filter blur-3xl opacity-20 -z-10"></div>
-      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-luximo-200 rounded-full filter blur-3xl opacity-20 -z-10"></div>
     </section>;
 };
 export default HeroSection;
+
