@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,9 +30,9 @@ const Navbar = () => {
       }`}
     >
       <nav className="container mx-auto flex items-center justify-between">
-        <a href="#" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <span className="text-2xl font-bold text-luximo-700">Estelio</span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
@@ -54,8 +55,8 @@ const Navbar = () => {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="border-luximo-600 text-luximo-600 hover:bg-luximo-50">
-            Вижте демо
+          <Button variant="outline" className="border-luximo-600 text-luximo-600 hover:bg-luximo-50" asChild>
+            <Link to="/login">Вход</Link>
           </Button>
           <Button className="bg-luximo-600 hover:bg-luximo-700 text-white">
             Свържете се с нас
@@ -91,8 +92,8 @@ const Navbar = () => {
               ЧЗВ
             </a>
             <div className="flex flex-col space-y-3 pt-2">
-              <Button variant="outline" className="w-full border-luximo-600 text-luximo-600 hover:bg-luximo-50">
-                Вижте демо
+              <Button variant="outline" className="w-full border-luximo-600 text-luximo-600 hover:bg-luximo-50" asChild>
+                <Link to="/login">Вход</Link>
               </Button>
               <Button className="w-full bg-luximo-600 hover:bg-luximo-700 text-white">
                 Свържете се с нас
