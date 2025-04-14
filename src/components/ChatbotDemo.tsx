@@ -60,13 +60,13 @@ const ChatbotDemo = () => {
     }
   }, [currentIndex, demoConversation.length]);
   return <div className="relative bg-white rounded-xl shadow-xl overflow-hidden w-full max-w-sm mx-auto md:mx-0 border border-gray-200">
-      <div className="bg-luximo-600 text-white p-4 flex flex-col items-start py-[10px] px-[16px]">
+      <div className="bg-luximo-600 text-white p-4 flex flex-col items-start py-[10px] px-[16px] relative">
         <div className="flex items-center gap-2">
           <Bot size={20} />
           <span className="font-medium">Estelio Асистент</span>
         </div>
         <p className="text-[10px] text-gray-300 italic mt-1 text-left w-full">Демо база данни, използваща публично достъпни имоти от Luximo</p>
-        <div className="h-2 w-2 rounded-full bg-green-400 self-end px-0 my-[4px] py-px mx-px"></div>
+        <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-green-400"></div>
       </div>
 
       <div className="p-4 h-96 flex flex-col overflow-y-auto bg-gray-50">
