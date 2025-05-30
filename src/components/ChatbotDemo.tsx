@@ -31,14 +31,39 @@ const ChatbotDemo = () => {
 
   // WebSocket connection
   useEffect(() => {
-    // For now, we'll simulate a connection since we don't have a real websocket URL
-    // Replace 'ws://localhost:8080' with your actual websocket URL when ready
     const connectWebSocket = () => {
       try {
-        // Simulate connection for demo purposes
-        setIsConnected(true);
+        // Connect to local WebSocket server
+        const ws = new WebSocket('ws://localhost:8080');
+        wsRef.current = ws;
         
-        console.log("WebSocket connection simulated");
+        ws.onopen = () => {
+          console.log("WebSocket connected to localhost:8080");
+          setIsConnected(true);
+        };
+        
+        ws.onmessage = (event) => {
+          console.log("Received message:", event.data);
+          const botMessage: Message = {
+            id: Date.now(),
+            text: event.data,
+            sender: "bot",
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, botMessage]);
+          setIsTyping(false);
+        };
+        
+        ws.onclose = () => {
+          console.log("WebSocket connection closed");
+          setIsConnected(false);
+        };
+        
+        ws.onerror = (error) => {
+          console.error("WebSocket error:", error);
+          setIsConnected(false);
+        };
+        
       } catch (error) {
         console.error("WebSocket connection failed:", error);
         setIsConnected(false);
@@ -56,7 +81,7 @@ const ChatbotDemo = () => {
   }, []);
 
   const sendMessage = () => {
-    if (!inputValue.trim() || !isConnected) return;
+    if (!inputValue.trim() || !isConnected || !wsRef.current) return;
 
     const userMessage: Message = {
       id: Date.now(),
@@ -66,23 +91,13 @@ const ChatbotDemo = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    
+    // Send message to WebSocket server
+    wsRef.current.send(inputValue.trim());
+    console.log("Message sent:", inputValue);
+    
     setInputValue("");
     setIsTyping(true);
-
-    // Simulate bot response for now
-    // Replace this with actual websocket message sending
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: Date.now() + 1,
-        text: "Благодаря за запитването! В момента работя по намирането на подходящи имоти за вас...",
-        sender: "bot",
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, botResponse]);
-      setIsTyping(false);
-    }, 1500);
-
-    console.log("Message sent:", inputValue);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -107,7 +122,7 @@ const ChatbotDemo = () => {
           <span className="font-medium">Estelio Асистент</span>
         </div>
         <p className="text-[10px] text-gray-300 italic mt-1 text-left w-full">
-          Функционален чат - готов за свързване с вашия бот
+          Свързан с localhost:8080
         </p>
         <div className={`absolute top-2 right-2 h-2 w-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}></div>
       </div>
@@ -177,7 +192,7 @@ const ChatbotDemo = () => {
         </div>
         {!isConnected && (
           <p className="text-xs text-red-500 mt-1">
-            Връзката не е установена
+            Не може да се свърже с localhost:8080
           </p>
         )}
       </div>
