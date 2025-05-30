@@ -33,12 +33,12 @@ const ChatbotDemo = () => {
   useEffect(() => {
     const connectWebSocket = () => {
       try {
-        // Connect to local WebSocket server
-        const ws = new WebSocket('ws://localhost:8080');
+        // Connect to local WebSocket server on port 8081
+        const ws = new WebSocket('ws://localhost:8081');
         wsRef.current = ws;
         
         ws.onopen = () => {
-          console.log("WebSocket connected to localhost:8080");
+          console.log("WebSocket connected to localhost:8081");
           setIsConnected(true);
         };
         
@@ -122,7 +122,7 @@ const ChatbotDemo = () => {
           <span className="font-medium">Estelio Асистент</span>
         </div>
         <p className="text-[10px] text-gray-300 italic mt-1 text-left w-full">
-          Свързан с localhost:8080
+          Свързан с localhost:8081
         </p>
         <div className={`absolute top-2 right-2 h-2 w-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}></div>
       </div>
@@ -192,7 +192,7 @@ const ChatbotDemo = () => {
         </div>
         {!isConnected && (
           <p className="text-xs text-red-500 mt-1">
-            Не може да се свърже с localhost:8080
+            Не може да се свърже с localhost:8081
           </p>
         )}
       </div>
