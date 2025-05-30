@@ -1,4 +1,3 @@
-
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -12,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-1">
-            <h3 className="text-2xl font-bold text-white mb-4">Luximo</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">Estelio</h3>
             <p className="mb-4">
               AI асистент за недвижими имоти, който помага на агенциите да обслужват клиенти 24/7 и да увеличат своите продажби.
             </p>
@@ -50,7 +49,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>София, ул. "Шипченски проход" 63</li>
               <li>+359 2 888 1234</li>
-              <li>info@luximo.bg</li>
+              <li>info@estelio.bg</li>
             </ul>
           </div>
 
@@ -73,7 +72,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">
-              © {currentYear} Luximo. Всички права запазени.
+              © {currentYear} Estelio. Всички права запазени.
             </p>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Условия за ползване</a>
