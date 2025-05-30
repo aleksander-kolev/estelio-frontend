@@ -35,7 +35,7 @@ const DashboardNav = () => {
               <span className="text-xl font-bold text-luximo-700">Estelio</span>
             </Link>
             <span className="ml-6 text-sm font-medium text-gray-500 hidden md:block">
-              {user?.agencyName}
+              {user?.email}
             </span>
           </div>
 
@@ -104,7 +104,7 @@ const DashboardNav = () => {
           <div className="md:hidden py-2 bg-white border-t border-gray-100 animate-fade-in">
             <div className="flex flex-col">
               <div className="px-4 py-2 text-sm font-medium text-gray-500">
-                {user?.agencyName}
+                {user?.email}
               </div>
               <Link
                 to="/dashboard"
