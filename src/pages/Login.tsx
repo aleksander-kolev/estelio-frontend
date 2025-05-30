@@ -17,7 +17,7 @@ interface FormValues {
 
 const Login = () => {
   const { login, user, isLoading } = useAuth();
-  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<FormValues>({
     defaultValues: {
@@ -27,17 +27,21 @@ const Login = () => {
   });
 
   const onSubmit = async (data: FormValues) => {
-    setError("");
+    setIsSubmitting(true);
     try {
       await login(data.email, data.password);
     } catch (err) {
-      setError("Възникна проблем. Моля, опитайте отново.");
+      // Error handling is now done in the AuthContext
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   if (user) {
     return <Navigate to="/dashboard" />;
   }
+
+  const isFormLoading = isLoading || isSubmitting;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
@@ -65,6 +69,13 @@ const Login = () => {
                 <FormField
                   control={form.control}
                   name="email"
+                  rules={{
+                    required: "Имейлът е задължителен",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Невалиден имейл адрес"
+                    }
+                  }}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Имейл</FormLabel>
@@ -74,7 +85,7 @@ const Login = () => {
                           type="email" 
                           {...field}
                           autoComplete="email"
-                          disabled={isLoading}
+                          disabled={isFormLoading}
                         />
                       </FormControl>
                       <FormMessage />
@@ -84,6 +95,13 @@ const Login = () => {
                 <FormField
                   control={form.control}
                   name="password"
+                  rules={{
+                    required: "Паролата е задължителна",
+                    minLength: {
+                      value: 6,
+                      message: "Паролата трябва да е поне 6 символа"
+                    }
+                  }}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Парола</FormLabel>
@@ -93,7 +111,7 @@ const Login = () => {
                           type="password" 
                           {...field} 
                           autoComplete="current-password"
-                          disabled={isLoading}
+                          disabled={isFormLoading}
                         />
                       </FormControl>
                       <FormMessage />
@@ -101,14 +119,12 @@ const Login = () => {
                   )}
                 />
                 
-                {error && <p className="text-destructive text-sm">{error}</p>}
-                
                 <Button 
                   type="submit" 
                   className="w-full bg-luximo-600 hover:bg-luximo-700"
-                  disabled={isLoading}
+                  disabled={isFormLoading}
                 >
-                  {isLoading ? (
+                  {isFormLoading ? (
                     <span className="flex items-center justify-center">
                       <span className="mr-2">Зареждане</span>
                       <div className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
@@ -122,7 +138,7 @@ const Login = () => {
           </CardContent>
           <CardFooter className="flex justify-center">
             <p className="text-sm text-muted-foreground">
-              Demo достъп: luximo@example.com / password123
+              Използвайте вашия Supabase акаунт за вход
             </p>
           </CardFooter>
         </Card>

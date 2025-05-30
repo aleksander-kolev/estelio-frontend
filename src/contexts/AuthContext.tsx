@@ -2,12 +2,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-
-interface User {
-  id: string;
-  email: string;
-  agencyName: string;
-}
+import { supabase } from "@/integrations/supabase/client";
+import { User, Session } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: User | null;
@@ -18,75 +14,90 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock user data
-const MOCK_USERS = [
-  { id: "1", email: "luximo@example.com", password: "password123", agencyName: "Luximo Real Estate" },
-  { id: "2", email: "sofia@example.com", password: "password123", agencyName: "Sofia Properties" },
-  { id: "3", email: "varna@example.com", password: "password123", agencyName: "Varna Luxury Homes" }
-];
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check if user is logged in from localStorage
-    const storedUser = localStorage.getItem("estilio_user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
+        setSession(session);
+        setUser(session?.user ?? null);
+        setIsLoading(false);
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
     try {
-      // Find user with matching credentials
-      const foundUser = MOCK_USERS.find(
-        u => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-      );
-      
-      if (foundUser) {
-        const { password: _, ...userWithoutPassword } = foundUser;
-        setUser(userWithoutPassword);
-        localStorage.setItem("estilio_user", JSON.stringify(userWithoutPassword));
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user) {
         navigate("/dashboard");
         toast({
           title: "Успешен вход",
-          description: `Добре дошли, ${userWithoutPassword.agencyName}!`,
-        });
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Грешка при вписване",
-          description: "Невалиден имейл или парола",
+          description: `Добре дошли!`,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Login error:', error);
+      let errorMessage = "Възникна проблем. Моля, опитайте отново.";
+      
+      if (error.message?.includes('Invalid login credentials')) {
+        errorMessage = "Невалиден имейл или парола";
+      } else if (error.message?.includes('Email not confirmed')) {
+        errorMessage = "Моля, потвърдете имейла си преди да се впишете";
+      }
+      
       toast({
         variant: "destructive",
         title: "Грешка при вписване",
-        description: "Възникна проблем. Моля, опитайте отново.",
+        description: errorMessage,
       });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("estilio_user");
-    navigate("/");
-    toast({
-      title: "Успешно излизане",
-      description: "Довиждане!",
-    });
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/");
+      toast({
+        title: "Успешно излизане",
+        description: "Довиждане!",
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast({
+        variant: "destructive",
+        title: "Грешка при излизане",
+        description: "Възникна проблем при излизане",
+      });
+    }
   };
 
   return (
