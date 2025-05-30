@@ -16,15 +16,18 @@ const ChatbotDemo = () => {
   const [isTyping, setIsTyping] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom when new messages arrive
+  // Scroll to bottom when new messages arrive - only within chat container
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isTyping]);
 
   // WebSocket connection
   useEffect(() => {
@@ -35,14 +38,6 @@ const ChatbotDemo = () => {
         // Simulate connection for demo purposes
         setIsConnected(true);
         
-        // Add initial bot message
-        setMessages([{
-          id: 1,
-          text: "Здравейте! Как мога да ви помогна с търсенето на имот?",
-          sender: "bot",
-          timestamp: new Date()
-        }]);
-
         console.log("WebSocket connection simulated");
       } catch (error) {
         console.error("WebSocket connection failed:", error);
@@ -117,7 +112,10 @@ const ChatbotDemo = () => {
         <div className={`absolute top-2 right-2 h-2 w-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}></div>
       </div>
 
-      <div className="p-4 h-96 flex flex-col overflow-y-auto bg-gray-50">
+      <div 
+        ref={chatContainerRef}
+        className="p-4 h-96 flex flex-col overflow-y-auto bg-gray-50 scroll-smooth"
+      >
         <div className="flex-grow flex flex-col space-y-4">
           {messages.map(message => (
             <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
