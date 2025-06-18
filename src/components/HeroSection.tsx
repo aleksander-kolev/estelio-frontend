@@ -12,7 +12,8 @@ const HeroSection = () => {
               <MessageSquare size={16} /> 
               <span>ИИ асистент за имоти</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6x
+            l font-bold text-gray-900 leading-tight">
               AI агент за недвижими имоти – 24/7 виртуален консултант за вашите клиенти
             </h1>
             <p className="text-xl text-gray-600">
@@ -51,11 +52,8 @@ const HeroSection = () => {
                 <span className="ml-1">14 дни безплатен тест</span>
               </div>
             </div>
-          </div>
-
-          <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-float relative">
+          </div>          <div className="w-full md:w-1/2 flex justify-center md:justify-end relative">
             <ChatbotDemo />
-            
           </div>
         </div>
       </div>
