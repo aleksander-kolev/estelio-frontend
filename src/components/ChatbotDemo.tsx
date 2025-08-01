@@ -270,7 +270,7 @@ export default function ChatbotDemo() {  // Helper function to check if user dat
       }      console.log('🌐 Making API request to /api/chat-simple with:', requestBody);
 
       // Make request to the real API endpoint according to API.md
-      const response = await fetch('http://localhost:8000/api/chat-simple', {
+      const response = await fetch('https://chat.estelio.homes/api/chat-simple', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
